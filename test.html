@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form with Toast Notification</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <form id="contact-form" class="ud-contact-form" method="POST">
+    <div class="ud-form-group">
+      <label for="fullName">Full Name*</label>
+      <input type="text" name="fullName" placeholder="Adam Gelius" required="required" />
+    </div>
+    <div class="ud-form-group">
+      <label for="email">Email*</label>
+      <input type="email" name="email" placeholder="example@yourmail.com" required="required" />
+    </div>
+    <div class="ud-form-group">
+      <label for="phone">Phone*</label>
+      <input type="text" name="phone" placeholder="+91 1254 5211 552" required="required" />
+    </div>
+    <div class="ud-form-group">
+      <label for="message">Message*</label>
+      <textarea name="message" rows="1" placeholder="type your message here" required="required"></textarea>
+    </div>
+    <div class="ud-form-group mb-0">
+      <button type="submit" class="ud-main-btn">Send Message</button>
+    </div>
+  </form>
+
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="form-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto">Notification</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        Message sent!
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#contact-form').on('submit', function(e) {
+        e.preventDefault(); // Prevent the default form submission
+        
+        // Serialize form data
+        var formData = $(this).serialize();
+        
+        // Send form data using AJAX
+        $.ajax({
+          url: 'https://formspree.io/f/xzbnnylk', // Formspree URL
+          method: 'POST',
+          data: formData,
+          dataType: 'json',
+          success: function(response) {
+            // Show the toast notification
+            $('#form-toast').toast('show');
+            // Clear the form fields
+            $('#contact-form')[0].reset();
+          },
+          error: function(error) {
+            console.error('Form submission error:', error);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

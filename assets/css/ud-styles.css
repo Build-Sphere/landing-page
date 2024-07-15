@@ -16,7 +16,8 @@
   --body-color: #637381;
   --heading-color: #212b36;
   --primary-color: #3056d3;
-  --hero-color: #B57EDC;
+  --hero-color: linear-gradient(to bottom, #A56EFE, #feb47b);
+  --purple:#A56EFE;
   --white: #ffffff;
 }
 
@@ -2634,7 +2635,8 @@ p {
 
 .services-header{
   padding: 20px;
-  background-color: var(--primary-color);
+  /* background-color: var(--purple); */
+  background-image: linear-gradient(to right, #A56EFE, #feb47b);
 }
 /* Styles for ud-blockchain-services section */
 
